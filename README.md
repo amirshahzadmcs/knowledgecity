@@ -143,13 +143,6 @@ php artisan migrate:fresh --seed
 3. Use token in Authorization header: `Bearer {your-token}`
 4. Test protected endpoints
 
-### Example Request
-```bash
-curl -X GET http://localhost:8000/api/courses \
-  -H "Authorization: Bearer {your-token}" \
-  -H "Accept: application/json"
-```
-
 ## 🏗️ Architecture
 
 ### Current Implementation
@@ -166,52 +159,5 @@ curl -X GET http://localhost:8000/api/courses \
   - KSA users → KSA region storage
 - **Microservices Architecture** - Service mesh implementation
 
-## 🚀 Deployment
-
-### Development
-```bash
-php artisan serve
-```
-
-### Production (Docker)
-```bash
-# Build and run with Docker
-docker-compose up -d
-```
-
-### AWS Deployment
-- **ECS Fargate** for container hosting
-- **RDS MySQL** for database
-- **S3** for file storage
-- **CloudFront** for CDN
-- **Route 53** for DNS
-
-
-## 🔒 Security
-
-### Implemented
-- **Laravel Sanctum** authentication
-- **CSRF Protection** for web routes
-- **SQL Injection** prevention via Eloquent
-- **XSS Protection** via Laravel's built-in features
-
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/new-feature`
-3. Commit changes: `git commit -am 'Add new feature'`
-4. Push to branch: `git push origin feature/new-feature`
-5. Submit a Pull Request
-
-## 📄 License
-
-This project is for educational and assessment purposes under the KnowledgeCity test assignment.
-
-## 📞 Support
-
-For questions or support, please contact the development team.
-
----
 
 **Built with ❤️ using Laravel 12**
