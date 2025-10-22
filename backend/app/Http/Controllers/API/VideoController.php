@@ -54,7 +54,6 @@ class VideoController extends Controller
             return response()->json(['message' => 'File not found'], 404);
         }
 
-        // Log video play for student users
         $user = request()->user('sanctum');
         if ($user && $user->role === 'student') {
             AnalyticsHelper::logEvent(

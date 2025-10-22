@@ -29,50 +29,6 @@ class CourseController extends Controller
         return response()->json($courses);
     }
 
-    // Store a new course
-    public function store(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'title' => 'required|string|max:255',
-            'instructor_id' => 'required|exists:users,id',
-            'slug' => 'nullable|string|unique:courses,slug',
-            'description' => 'nullable|string',
-            'category' => 'nullable|string|max:100',
-            'language' => 'nullable|string|max:50',
-            'level' => 'nullable|string|max:50',
-            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'price' => 'nullable|numeric|min:0',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
-        $thumbnailUrl = null;
-        if ($request->hasFile('thumbnail')) {
-            $file = $request->file('thumbnail');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->storeAs('public/thumbnails', $filename);
-            $thumbnailUrl = url('storage/thumbnails/' . $filename);
-        }
-        $course = Course::create([
-            'title' => $request->title,
-            'instructor_id' => $request->instructor_id,
-            'slug' => $request->slug ?? Str::slug($request->title) . '-' . time(),
-            'description' => $request->description,
-            'category' => $request->category,
-            'language' => $request->language,
-            'level' => $request->level,
-            'thumbnail_url' => $thumbnailUrl,
-            'price' => $request->price ?? 0,
-            'is_published' => true,
-        ]);
-
-        return response()->json([
-            'message' => 'Course created successfully',
-            'course' => $course
-        ], 201);
-    }
-
     public function show($id)
     {
         $course = Course::with(['lessons.video', 'instructor'])->find($id);
