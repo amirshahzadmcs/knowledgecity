@@ -1,4 +1,4 @@
-# KnowledgeCity Backend
+# KnowledgeCity Backend & Frontend
 
 A multi-regional educational platform backend built with Laravel 12, providing secure RESTful APIs for user authentication, course management, enrollments, payments, and video streaming.
 
